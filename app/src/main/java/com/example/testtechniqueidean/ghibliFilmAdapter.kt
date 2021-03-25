@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.testtechniqueidean.api.ApiData
 
@@ -14,6 +15,7 @@ RecyclerView.Adapter<ghibliFilmAdapter.ViewHolder>(){
 
 
     class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
+        val cardView = itemView.findViewById<CardView>(R.id.card_view)
         val title_View = itemView.findViewById<TextView>(R.id.title_film)
         val released_date_View = itemView.findViewById<TextView>(R.id.released_date)
         val image_film_View = itemView.findViewById<ImageView>(R.id.image_film)
@@ -27,6 +29,8 @@ RecyclerView.Adapter<ghibliFilmAdapter.ViewHolder>(){
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val film = films[position]
         holder.apply {
+            cardView.setOnClickListener(itemClickListener)
+            cardView.tag = position
             title_View.text = film.title
             released_date_View.text= film.release_date.toString()
         }
