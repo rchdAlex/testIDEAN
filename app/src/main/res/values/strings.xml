@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">TestTechniqueIDEAN</string>
+
+
+    <string name="test_title">ceci est un titre</string>
+    <string name="test_date">1980</string>
+    <string name="test_producteur">Prod Ucteur</string>
+    <string name="test_directeur">Direct Eur</string>
+    <string name="test_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin posuere et tellus eu tincidunt. Aenean sed tellus metus. Mauris non lobortis tortor, et lacinia massa. In facilisis neque nec consequat auctor. Vestibulum tempor ipsum at fermentum eleifend. Nulla in lobortis neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aenean orci neque, suscipit ac mauris at, luctus euismod turpis. Fusce interdum euismod ipsum semper pellentesque. Nulla hendrerit felis vitae mattis porttitor. Aliquam vehicula nisl sem, sed ultrices libero pharetra id. Duis consectetur est libero, ac ornare ex facilisis tempus. Duis quis blandit ex. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nunc at quam gravida, congue ante sed, volutpat libero. Nam finibus, purus ut tincidunt scelerisque, dolor ipsum molestie nibh, non condimentum ex quam ac urna.</string>
+
 </resources>
