@@ -3,6 +3,11 @@ package com.example.testtechniqueidean.api
 import android.os.Parcel
 import android.os.Parcelable
 
+/*
+class retrieves data from api
+
+liked var for like and unlike movie
+ */
 data class ApiData(
     val title: String?,
     val description: String?,

@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var recyclerView: RecyclerView
     lateinit var imageFilms: MutableList<String>
     lateinit var check: ToggleButton
-    lateinit var retry_call_button:Button
+    lateinit var retry_call_button: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         retry_call_button = findViewById<Button>(R.id.retry_call_api)
 
+        //custom menu
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
@@ -54,6 +55,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         retry_call_button.isVisible = false
     }
 
+    // Function for async api call
     private fun makeRequest() {
         val api = Retrofit.Builder()
                 .baseUrl(Base_URL)
@@ -61,19 +63,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(ApiRequest::class.java)
-
-        /*  api.getFilmGhibli().enqueue(object : Callback<List<ApiData>> {
-              override fun onResponse(call: Call<List<ApiData>>, response: Response<List<ApiData>>) {
-
-                  films = (response.body() as MutableList<ApiData>?)!!
-                  adapter.setData(films)
-              }
-
-              override fun onFailure(call: Call<List<ApiData>>, t: Throwable) {
-                  Log.d("MAIN", "onFailure: fail retrofit call")
-              }
-
-          })*/ // cela fonctionne
 
         val compositeDisposable = CompositeDisposable()
 
@@ -93,7 +82,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         )
     }
 
-
+    // Function for api call
     private fun onFailure(t: Throwable?) {
         Log.d("Main", "onFailure: $t")
     }
@@ -103,6 +92,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         adapter.setData(films)
     }
 
+    fun onClickRetryCall() {
+        makeRequest()
+        retry_call_button.isVisible = false
+    }
+////////////////////////////////////////////////
+
+    // Menu and item menu
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.activity_main_film_list, menu)
         return true
@@ -118,6 +114,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    // function to display favorite movies
     private fun displayLikedFilm() {
         films.filter {
             it.liked
@@ -125,12 +122,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         adapter.notifyDataSetChanged()
     }
 
+/////////////////////////////////////////////////////
+
+
     override fun onClick(view: View?) {
         if (view?.tag != null) {
             showFilmDetail(view.tag as Int)
         }
     }
 
+    // function display movie details
     private fun showFilmDetail(filmIndex: Int) {
 
         val film = films[filmIndex]
@@ -142,6 +143,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     }
 
+    //function to manage feedback detail activity
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode != Activity.RESULT_OK || data == null) {
@@ -168,11 +170,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         adapter.notifyDataSetChanged()
 
-    }
-
-    fun onClickRetryCall() {
-        makeRequest()
-        retry_call_button.isVisible = false
     }
 
 

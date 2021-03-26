@@ -64,22 +64,17 @@ class DetailFilmActivity : AppCompatActivity() {
         Glide.with(this).load(R.drawable.castle_poster).into(imgFilm)
     }
 
+    // Function add movie to favorite movie
     fun onClickAddFavoriteFilm(view: View) {
         likeButton.setOnClickListener {
             if (!film.liked)
             film.liked = true
         }
     }
-
+/***********************Menu***********************************/
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.activity_film_detail, menu)
         return true
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putBoolean(KEY_SAVE_LIKE, film.liked)
-        Log.d("DETAIL", "onSaveInstanceState: called")
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -91,7 +86,16 @@ class DetailFilmActivity : AppCompatActivity() {
             else -> return super.onOptionsItemSelected(item)
         }
     }
+/**********************************************************/
 
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBoolean(KEY_SAVE_LIKE, film.liked)
+        Log.d("DETAIL", "onSaveInstanceState: called")
+    }
+
+    // function save changes detail
     private fun saveFilm() {
         film.liked = likeButton.isChecked
         intent = Intent()
