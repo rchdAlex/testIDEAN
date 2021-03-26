@@ -1,0 +1,24 @@
+
+L'application se présente sous la forme de 2 activity :
+
+-> la première affiche la liste complete des films avec la possibilité d'ajouter un film a ses favoris
+-> lorsque l'on clique sur un élément de la liste , on lance la deuxième activité avec les informations passées grace à un intent
+-> le menu de cette première activity comporte un coeur permettent l'affichage des films favoris ( non fonctionnel )
+
+-> la deuxième activité affiche le detail du film
+-> si le film a été ajouté au favoris précédemment l'icon favoris est alors mis à jour
+-> le menu comporte une fleche permettant le retour à l'Activity principal
+
+Dans le manifest la permission pour utiliser internet est présente
+
+Choix des librairies
+
+-> utilisation d'une recycler view pour permettre un affichage dynamique de la liste des films
+-> utilisation de RXjava pour effectuer un appel asynchrone de l'api et ne pas etre bloquant pour l'affichage ( possibilité d'utiliser des coroutines )
+-> utilisation de Glide pour afficher les images ( possibilité d'utiliser Picasso )
+-> utilisation de Retrofit pour le call api et du convertisseur GSON pour parser les données renvoyées
+
+
+Autre choix possible:
+
+Faire une single acticity app , avec 2 fragment , le premier pour afficher la liste et le second pour afficher les details ( avantage de ce choix -> utilisation des tablettes )
