@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_add_fav"
+        android:id="@+id/back_home"
         app:showAsAction="always"
-        android:title="likedFilm"
+        android:title="back"
         android:checkable="true"
-        android:icon="@drawable/baseline_favorite_black_24"/>
+        android:icon="@drawable/ic_baseline_arrow_back_24"/>
 </menu>

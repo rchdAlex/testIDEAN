@@ -35,6 +35,7 @@
         tools:text="@string/test_title" />
 
     <ToggleButton
+        android:id="@+id/liked_button_detail"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_margin="32dp"

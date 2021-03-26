@@ -55,7 +55,7 @@
                 android:layout_alignParentRight="true"
                 android:textOn=""
                 android:textOff=""
-                android:onClick="onClickAddFavoriteFilm"
+                android:onClick="onClick"
                 android:background="@drawable/toggle_selector"/>
 
         </RelativeLayout>

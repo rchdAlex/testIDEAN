@@ -11,8 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TestTechniqueIDEAN">
-        <activity android:name=".DetailFilmActivity"
-            android:parentActivityName=".MainActivity"></activity>
+        <activity android:name=".DetailFilmActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
