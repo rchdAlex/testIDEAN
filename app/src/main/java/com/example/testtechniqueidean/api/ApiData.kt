@@ -18,7 +18,7 @@ data class ApiData(
     val people: List<String>?,
     val url: String?,
     var liked: Boolean,
-    var image: Int = R.drawable.placeholder
+    var image: Int ,
 ) : Parcelable{
     constructor(parcel: Parcel) : this(
         parcel.readString(),
@@ -28,7 +28,8 @@ data class ApiData(
         parcel.readInt(),
         parcel.createStringArrayList(),
         parcel.readString(),
-        parcel.readByte() != 0.toByte()
+        parcel.readByte() != 0.toByte(),
+        parcel.readInt()
     ) {
     }
 
@@ -41,6 +42,7 @@ data class ApiData(
         parcel.writeStringList(people)
         parcel.writeString(url)
         parcel.writeByte(if (liked) 1 else 0)
+        parcel.writeInt(image)
     }
 
     override fun describeContents(): Int {
@@ -56,4 +58,5 @@ data class ApiData(
             return arrayOfNulls(size)
         }
     }
+
 }
