@@ -5,6 +5,7 @@
    <item android:id="@+id/display_liked_film"
        app:showAsAction="always"
        android:checkable="true"
+       android:checked="true"
        android:icon="@drawable/baseline_favorite_black_24"
        android:title="Display_only_liked_film"
        />

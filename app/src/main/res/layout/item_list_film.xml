@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/ghibli_color"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clickable="true"
         android:focusable="true"
+        card_view:cardUseCompatPadding="true"
+        card_view:cardElevation="4dp"
+        card_view:cardCornerRadius="3dp"
         android:foreground="?android:attr/selectableItemBackground">
 
-        <RelativeLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -22,16 +28,22 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_margin="16dp"
-                android:src="@mipmap/ic_launcher"
+                card_view:layout_constraintLeft_toLeftOf="parent"
+                card_view:layout_constraintTop_toTopOf="parent"
+                card_view:layout_constraintBottom_toBottomOf="parent"
+                android:src="@drawable/placeholder"
                 tools:background="@color/black" />
 
             <TextView
                 android:id="@+id/title_film"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_toRightOf="@id/image_film"
-                android:maxLength="25"
+                android:layout_marginTop="16dp"
+                card_view:layout_constraintLeft_toRightOf="@id/image_film"
+                card_view:layout_constraintTop_toTopOf="parent"
+                card_view:layout_constraintRight_toLeftOf="@id/liked_button"
+                android:autoSizeTextType="uniform"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 tools:text="@string/test_title" />
@@ -40,10 +52,10 @@
                 android:id="@+id/released_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/title_film"
-                android:layout_toRightOf="@id/image_film"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
+                card_view:layout_constraintTop_toBottomOf="@id/title_film"
+                card_view:layout_constraintLeft_toRightOf="@id/image_film"
                 android:textSize="15sp"
                 tools:text="@string/test_date" />
 
@@ -52,13 +64,15 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_margin="16dp"
-                android:layout_alignParentRight="true"
+                card_view:layout_constraintBottom_toBottomOf="@id/title_film"
+                card_view:layout_constraintLeft_toRightOf="@id/title_film"
+                card_view:layout_constraintRight_toRightOf="parent"
+                card_view:layout_constraintTop_toTopOf="@id/title_film"
                 android:textOn=""
                 android:textOff=""
-                android:onClick="onClick"
                 android:background="@drawable/toggle_selector"/>
 
-        </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 

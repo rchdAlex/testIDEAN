@@ -2,6 +2,7 @@ package com.example.testtechniqueidean.api
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.example.testtechniqueidean.R
 
 /*
 class retrieves data from api
@@ -16,7 +17,8 @@ data class ApiData(
     val release_date: Int,
     val people: List<String>?,
     val url: String?,
-    var liked: Boolean
+    var liked: Boolean,
+    var image: Int = R.drawable.placeholder
 ) : Parcelable{
     constructor(parcel: Parcel) : this(
         parcel.readString(),

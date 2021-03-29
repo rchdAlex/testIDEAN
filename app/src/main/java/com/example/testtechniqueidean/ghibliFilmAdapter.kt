@@ -39,12 +39,12 @@ RecyclerView.Adapter<ghibliFilmAdapter.ViewHolder>(){
             cardView.tag = position
             title_View.text = film.title
             released_date_View.text= film.release_date.toString()
-            image_film_View.setImageResource(R.drawable.porco_rosse)
+            Glide.with(cardView).load(film.image).into(image_film_View)
+            like_button_View.isChecked = films[position].liked
             like_button_View.setOnClickListener {
-                if (like_button_View.isChecked){
-                    films[position].liked =true
-                }
+                films[position].liked = like_button_View.isChecked
             }
+
         }
     }
 

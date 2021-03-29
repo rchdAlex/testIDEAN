@@ -61,7 +61,7 @@ class DetailFilmActivity : AppCompatActivity() {
         directeurFilm.text = film.director
         descriptionFilm.text = film.description
         likeButton.isChecked = savedInstanceState?.getBoolean(KEY_SAVE_LIKE) ?: film.liked
-        Glide.with(this).load(R.drawable.castle_poster).into(imgFilm)
+        Glide.with(this).load(film.image).into(imgFilm)
     }
 
     // Function add movie to favorite movie

@@ -58,27 +58,27 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     // Function for async api call
     private fun makeRequest() {
         val api = Retrofit.Builder()
-                .baseUrl(Base_URL)
-                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(ApiRequest::class.java)
+            .baseUrl(Base_URL)
+            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(ApiRequest::class.java)
 
         val compositeDisposable = CompositeDisposable()
 
         compositeDisposable.add(
-                api.getFilmGhibli()
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeOn(Schedulers.io())
-                        .subscribe({ response ->
-                            onResponse(response)
-                        },
-                                { t ->
-                                    onFailure(t)
-                                    retry_call_button.isVisible = true
-                                    retry_call_button.setOnClickListener { onClickRetryCall() }
+            api.getFilmGhibli()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe({ response ->
+                    onResponse(response)
+                },
+                    { t ->
+                        onFailure(t)
+                        retry_call_button.isVisible = true
+                        retry_call_button.setOnClickListener { onClickRetryCall() }
 
-                                })
+                    })
         )
     }
 
@@ -88,7 +88,24 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun onResponse(response: List<ApiData>) {
+       // films = response as MutableList<ApiData>
+        addImageToApiResult(response)
+       // adapter.setData(films)
+    }
+
+    private fun addImageToApiResult(response: List<ApiData>) {
         films = response as MutableList<ApiData>
+        for (i in 0 until films.size){
+            when(films[i].title){
+                "Castle in the Sky" -> films[i].image = R.drawable.castle_poster
+                "Grave of the Fireflies"->films[i].image = R.drawable.grave_of_the_fireflies
+                "My Neighbor Totoro"->films[i].image = R.drawable.my_neighbor_totoro
+                "Kiki's Delivery Service" ->films[i].image = R.drawable.kikis_delivery_service
+                "Only Yesterday"->films[i].image = R.drawable.only_yesterday
+                "Porco Rosso"->films[i].image = R.drawable.porco_rosse
+                else -> films[i].image = R.drawable.placeholder
+            }
+        }
         adapter.setData(films)
     }
 
@@ -107,7 +124,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.display_liked_film -> {
-                displayLikedFilm()
+                if (item.isChecked){
+                    displayLikedFilm()
+                    item.isChecked = false
+                }else{
+                    displayAllFilm()
+                    item.isChecked = true
+                }
+
                 return true
             }
             else -> return super.onOptionsItemSelected(item)
@@ -116,10 +140,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     // function to display favorite movies
     private fun displayLikedFilm() {
-        films.filter {
-            it.liked
+        if (films.isNotEmpty()) {
+            val movies = films.filter { it.liked }
+            adapter.setData(movies)
         }
-        adapter.notifyDataSetChanged()
+    }
+
+    private fun displayAllFilm() {
+        if (films.isNotEmpty()) {
+            adapter.setData(films)
+        }
     }
 
 /////////////////////////////////////////////////////
@@ -160,15 +190,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         val film = data.getParcelableExtra<ApiData>(DetailFilmActivity.EXTRA_FILM)
         if (film != null) {
+
             saveFilm(film, filmIndex)
         }
     }
 
     private fun saveFilm(film: ApiData, filmIndex: Int) {
 
-        films[filmIndex].liked = film.liked
+        films[filmIndex].let { it.liked = film.liked }
 
-        adapter.notifyDataSetChanged()
+       adapter.notifyDataSetChanged()
 
     }
 
